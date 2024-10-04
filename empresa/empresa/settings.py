@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'empresa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'activosit',
+        'NAME': 'activositbbdd',
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',  # o la IP del servidor MySQL
