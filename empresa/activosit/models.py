@@ -15,7 +15,7 @@ class Dispositivo(models.Model):
     jiracompra = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivo'
 
     def __str__(self) -> str:

@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'dispositivo',
-                'managed': False,
+                'managed': True,
             },
         ),
     ]
