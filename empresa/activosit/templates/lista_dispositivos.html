@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Dispositivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 10px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar input {
+            width: 200px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .search-bar button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Lista de Dispositivos</h1>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+        <form method="GET" action="">
+            <input type="text" name="search" placeholder="Buscar dispositivo..." value="{{ request.GET.search }}">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <!-- Tabla de dispositivos -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nomenclatura</th>
+                <th>Número de Serie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dispositivo in dispositivos %}
+            <tr>
+                <td>{{ dispositivo.iddispositivo }}</td>
+                <td>{{ dispositivo.nomenclatura }}</td>
+                <td>{{ dispositivo.nrodeserie }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No se encontraron dispositivos.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
