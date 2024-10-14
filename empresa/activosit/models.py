@@ -19,7 +19,7 @@ class Historialubicacion(models.Model):
     dispositivo_iddispositivo = models.ForeignKey(Dispositivo, models.DO_NOTHING, db_column='dispositivo_iddispositivo')
     ubic_especifica_idubic_especifica = models.ForeignKey('UbicEspecifica', models.DO_NOTHING, db_column='ubic_especifica_idubic_especifica')
     observaciones = models.CharField(max_length=200, blank=True, null=True)
-    fecha = models.DateTimeField(default=timezone.now, blank=True, null=True)
+    fecha = models.DateTimeField(default=timezone.now, blank=False, null=False)
 
 
 
