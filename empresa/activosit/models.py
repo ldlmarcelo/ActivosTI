@@ -57,3 +57,29 @@ class Ubicacion(models.Model):
         managed = False
         db_table = 'ubicacion'
 
+class Gerencia(models.Model):
+    idgerencia = models.AutoField(primary_key=True)
+    gerencia = models.CharField(unique=True, max_length=45)
+
+    def __str__(self):
+        return self.gerencia  # Retorna el nombre de la gerencia
+
+    class Meta:
+        managed = False
+        db_table = 'gerencia'
+
+
+class Historialgerencia(models.Model):
+    idhistorialgerencia = models.AutoField(db_column='idhistorialGerencia', primary_key=True)  # Field name made lowercase. The composite primary key (idhistorialGerencia, gerencia_idgerencia, dispositivo_iddispositivo) found, that is not supported. The first column is selected.
+    dispositivo_iddispositivo = models.ForeignKey(Dispositivo, models.DO_NOTHING, db_column='dispositivo_iddispositivo')
+    gerencia_idgerencia = models.ForeignKey(Gerencia, models.DO_NOTHING, db_column='gerencia_idgerencia')
+    observaciones = models.CharField(max_length=45, blank=True, null=True)
+    fecha = models.DateTimeField(default=timezone.now, blank=True, null=True)
+    
+    def __str__(self):
+        return f"Historial de {self.dispositivo_iddispositivo} en {self.gerencia_idgerencia} el {self.fecha}"  # Personaliza la representación
+
+    class Meta:
+        managed = False
+        db_table = 'historialgerencia'
+        unique_together = (('idhistorialgerencia', 'gerencia_idgerencia', 'dispositivo_iddispositivo'),)

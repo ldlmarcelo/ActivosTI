@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Dispositivo, Historialubicacion, UbicEspecifica, Ubicacion
+from .models import Dispositivo, Historialubicacion, UbicEspecifica, Ubicacion, Gerencia, Historialgerencia
 
 
 @admin.register(Dispositivo)
@@ -27,3 +27,23 @@ class UbicEspecificaAdmin(admin.ModelAdmin):
 class UbicacionAdmin(admin.ModelAdmin):
     list_display = ('ubicacion',)  # Mostrar solo el campo 'ubicacion'
     search_fields = ('ubicacion',)  # Búsqueda por nombre de la ubicación
+
+@admin.register(Gerencia)
+class GerenciaAdmin(admin.ModelAdmin):
+    list_display = ('idgerencia', 'gerencia')
+    search_fields = ('gerencia',)
+
+@admin.register(Historialgerencia)
+class HistorialgerenciaAdmin(admin.ModelAdmin):
+    list_display = ('idhistorialgerencia', 'get_dispositivo', 'get_gerencia',  'observaciones','fecha')
+    list_filter = ('fecha', 'gerencia_idgerencia', 'dispositivo_iddispositivo')
+    search_fields = ('observaciones', 'gerencia_idgerencia__gerencia', 'dispositivo_iddispositivo__nomenclatura')
+
+      
+    def get_gerencia(self, obj):
+        return obj.gerencia_idgerencia.gerencia
+    get_gerencia.short_description = 'Gerencia'
+
+    def get_dispositivo(self, obj):
+        return obj.dispositivo_iddispositivo.nomenclatura
+    get_dispositivo.short_description = 'Dispositivo'
